@@ -1,0 +1,22 @@
+# Gradle
+*/.gradle
+*/build
+
+# Eclipse
+*/.classpath
+*/.project
+*/.settings
+*/bin
+
+# Npm
+*/node_modules
+*/npm-debug.*
+
+# Angular
+*/app/**/*.js
+*/*.js.map
+
+# Eclipse workspace
+.metadata
+.recommenders
+RemoteSystemsTempFiles

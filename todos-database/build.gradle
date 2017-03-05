@@ -1,0 +1,18 @@
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	runtime 'org.hsqldb:hsqldb:2.3.4'
+}
+
+mainClassName = 'org.hsqldb.server.Server'
+
+run {
+	args += '--database.0'
+	args += 'file:data/todos'
+	args += '--dbname.0'
+	args += 'todos'
+}
