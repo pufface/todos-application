@@ -13,8 +13,8 @@
 */npm-debug.*
 
 # Angular
-*/app/**/*.js
-*/*.js.map
+**/app/**/*.js
+**/app/**/*.js.map
 
 # Eclipse workspace
 .metadata
