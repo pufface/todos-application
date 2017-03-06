@@ -8,6 +8,8 @@ public interface TodoService {
 	
 	List<Todo> getAll();
 	
-	Todo create(String content);
+	Todo save(Todo todo);
+	
+	void delete(long id);
 
 }

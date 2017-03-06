@@ -1,9 +1,14 @@
 package sk.fillo.todos.model;
 
+import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Todo {
@@ -13,14 +18,18 @@ public class Todo {
 	private long id;
 	private String content;
 	private boolean done = false;
+	private Date dueTo;
+	
+	@ManyToOne
+	private User user;
+	
+	@ManyToOne
+	private Project project;
+
+	@ManyToMany
+	private Set<Label> labels;
 
 	public Todo() {
-	}
-
-	public Todo(long id, String content) {
-		super();
-		this.id = id;
-		this.content = content;
 	}
 
 	public long getId() {

@@ -4,10 +4,11 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,6 @@ import sk.fillo.todos.model.Todo;
 import sk.fillo.todos.service.TodoService;
 
 @RestController
-@Secured("ROLE_USER")
 public class TodoController {
 	
 	@Autowired
@@ -29,7 +29,17 @@ public class TodoController {
 	
 	@RequestMapping(path="/todos", method=RequestMethod.POST)
     public @ResponseBody Todo createTodo(@RequestBody Todo todo, Principal principal) {
-		return todoService.create(todo.getContent());
+		return todoService.save(todo);
+    }
+	
+	@RequestMapping(path="/todos", method=RequestMethod.PUT)
+    public @ResponseBody Todo updateTodo(@RequestBody Todo todo, Principal principal) {
+		return todoService.save(todo);
+    }
+	
+	@RequestMapping(path="/todos/{id}", method=RequestMethod.DELETE)
+    public void delete(@PathVariable(value="id") long id, Principal principal) {
+		todoService.delete(id);
     }
 
 }

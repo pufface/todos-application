@@ -20,10 +20,13 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public Todo create(String content) {
-		Todo todo = new Todo();
-		todo.setContent(content);
+	public Todo save(Todo todo) {
 		return todoRepository.save(todo);
+	}
+
+	@Override
+	public void delete(long id) {
+		todoRepository.delete(id);
 	}
 
 }
