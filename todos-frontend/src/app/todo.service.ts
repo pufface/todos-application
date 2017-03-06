@@ -1,42 +1,42 @@
 import { Injectable } from "@angular/core";
-import { Headers, Http } from '@angular/http';
+import { Headers } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 import { Todo } from './todo';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class TodoService {
 
-    // private headers = new Headers({'Content-Type': 'application/json'});
-    private headers = new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${btoa('user:password')}`
-    });
-
-    private baseUrl = 'http://localhost:8090';
-
-    constructor(private http: Http) {}
+    constructor(private http: AuthService) {}
 
     getAll(): Promise<Todo[]> {
-        const url = `${this.baseUrl}/todos`;
-        return this.http.get(url, { headers: this.headers})
-            .toPromise()
+        return this.http.get('/todos')
             .then(resp => resp.json() as Todo[])
             .catch(this.handleError)
     }
 
     create(content: string): Promise<Todo> {
-        const url = `${this.baseUrl}/todos`;
-        return this.http.post(url, { content }, { headers: this.headers})
-            .toPromise()
+        return this.http.post('/todos', { content })
             .then(resp => resp.json() as Todo)
             .catch(this.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
-        console.error('Todo Service Error', error);
-        return Promise.reject(error.message || error);
+    update(todo: Todo): Promise<Todo> {
+        return this.http.post('/todos', todo)
+            .then(resp => resp.json() as Todo)
+            .catch(this.handleError);
+    }
+
+    delete(id: number): Promise<boolean> {
+        return this.http.delete(`/todos/${id}`)
+            .then(resp => true)
+            .catch(this.handleError);
+    }
+
+    private handleError(error: any): void {
+        alert(error.text() || alert)
     }
 
 }

@@ -30,5 +30,22 @@ export class TodosComponent implements OnInit {
             .then(()=>this.newTodo = "");
     }
 
+    toggleTodo(todo: Todo): void {
+        const cloneTodo = Object.assign({}, todo)
+        cloneTodo.done = !cloneTodo.done;
+        this.todoService.update(cloneTodo)
+            .then(updatedTodo => {
+                const i = this.todos.indexOf(todo);
+                this.todos[i] = updatedTodo
+            });
+    }
+
+    deleteTodo(todo: Todo): void {
+        this.todoService.delete(todo.id)
+            .then(result => {
+                const i = this.todos.indexOf(todo);
+                this.todos.splice(i, 1);
+            })
+    }
 
 }

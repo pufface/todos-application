@@ -1,0 +1,16 @@
+<div class="container">
+    <form (ngSubmit)="login()" #loginForm="ngForm" style="max-width: 30em" class="center-block">
+        <h2 class="form-signin-heading">Please login</h2>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" required [(ngModel)]="user.username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" required [(ngModel)]="user.password" name="password">
+        </div>
+        <div class="alert-danger" style="word-break: break-all">{{errorMsg}}</div>
+        <label></label>
+        <button class="btn btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Login</button>
+    </form>
+</div>

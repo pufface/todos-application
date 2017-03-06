@@ -1,8 +1,17 @@
-<h3>Todos</h3>
+<div class="container">
 
-<ul>
-    <li *ngFor="let todo of todos">
-        {{todo.content}}
-    </li>
-</ul>
-<input [(ngModel)]="newTodo" placeholder="Enter todo" (keyup.enter)="createTodo()"/>
+    <div>
+        <h3>Todos</h3>
+    </div>
+    <div style="font-size: 2em" *ngFor="let todo of todos">
+        <div class="col">
+            <input type="checkbox" (click)="toggleTodo(todo)" [checked]="todo.done">
+            <span>{{todo.content}}</span>
+            <button type="button" class="btn btn-default pull-right" (click)="deleteTodo(todo)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+
+    <input class="form-control" [(ngModel)]="newTodo" placeholder="Enter todo" (keyup.enter)="createTodo()" />
+</div>
