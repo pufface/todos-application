@@ -40,9 +40,9 @@ export class AuthService {
 
     logout(): void {
         this.router.navigate(['/login']);
-        // this.user = null;
-        // this.options = null;
-        // this.authChange.next(null);
+        this.user = null;
+        this.options = null;
+        this.authChange.next(null);
     }
 
     isAuthenticated(): boolean {
@@ -83,7 +83,7 @@ export class AuthService {
 
     private handleError(error: any): Promise<any> {
         console.error('Http Service Error', error);
-        return Promise.reject(error.text() || error);
+        return Promise.reject(error);
     }
 
 }

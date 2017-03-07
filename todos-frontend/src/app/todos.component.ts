@@ -9,9 +9,10 @@ import { Todo } from './todo';
     templateUrl: './todos.component.html'
 })
 export class TodosComponent implements OnInit {
-        
+   
     todos: Todo[] = [];
-    newTodo: string = "";
+    newTodo = '';
+    errorMsg = '';
 
     constructor(private todoService: TodoService) {}
 
@@ -21,13 +22,15 @@ export class TodosComponent implements OnInit {
 
     getAllTodos(): void {
         this.todoService.getAll()
-          .then(todos => this.todos = todos);
+          .then(todos => this.todos = todos)
+          .catch(this.showError.bind(this));
     }
 
     createTodo(): void {
         this.todoService.create(this.newTodo)
             .then(todo => this.todos.push(todo))
-            .then(()=>this.newTodo = "");
+            .then(()=>this.newTodo = "")
+            .catch(this.showError.bind(this));
     }
 
     toggleTodo(todo: Todo): void {
@@ -37,7 +40,8 @@ export class TodosComponent implements OnInit {
             .then(updatedTodo => {
                 const i = this.todos.indexOf(todo);
                 this.todos[i] = updatedTodo
-            });
+            })
+            .catch(this.showError.bind(this));
     }
 
     deleteTodo(todo: Todo): void {
@@ -46,6 +50,11 @@ export class TodosComponent implements OnInit {
                 const i = this.todos.indexOf(todo);
                 this.todos.splice(i, 1);
             })
+            .catch(this.showError.bind(this));
+    }
+
+    showError(error: any): void {
+        this.errorMsg = error;
     }
 
 }

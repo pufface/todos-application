@@ -14,29 +14,21 @@ export class TodoService {
     getAll(): Promise<Todo[]> {
         return this.http.get('/todos')
             .then(resp => resp.json() as Todo[])
-            .catch(this.handleError)
     }
 
     create(content: string): Promise<Todo> {
         return this.http.post('/todos', { content })
             .then(resp => resp.json() as Todo)
-            .catch(this.handleError);
     }
 
     update(todo: Todo): Promise<Todo> {
         return this.http.post('/todos', todo)
             .then(resp => resp.json() as Todo)
-            .catch(this.handleError);
     }
 
     delete(id: number): Promise<boolean> {
         return this.http.delete(`/todos/${id}`)
             .then(resp => true)
-            .catch(this.handleError);
-    }
-
-    private handleError(error: any): void {
-        alert(error.text() || alert)
     }
 
 }
