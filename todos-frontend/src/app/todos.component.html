@@ -1,21 +1,39 @@
 <div class="container">
-    <div class="alert-danger" style="word-break: break-all">{{errorMsg}}</div>
-    <div style="margin-bottom: 30px">
-        <span class="h3">Todos</span>
-        <button class="btn btn-default pull-right" (click)="getAllTodos()">
-            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-        </button>
+    <div class="row">
+        <div class="cols-xs-12 alert-danger" style="word-break: break-all">{{errorMsg}}</div>
     </div>
-    <div *ngFor="let todo of todos">
-        <button class="btn btn-default" (click)="toggleTodo(todo)" >
-            <span *ngIf="!todo.done" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: transparent"></span>
-            <span *ngIf="todo.done" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        </button>
-        <span class="h3">{{todo.content}}</span>
-        <button type="button" class="btn btn-default pull-right" (click)="deleteTodo(todo)">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        </button>
+    <div class="row" style="margin-bottom: 30px">
+        <div class="col-xs-6">
+            <span class="h3">Todos</span>
+        </div>
+        <div class="col-xs-6">
+            <button class="btn btn-default pull-right" (click)="getAllTodos()">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+            </button>
+        </div>
     </div>
-
-    <input class="form-control" [(ngModel)]="newTodo" placeholder="Enter todo" (keyup.enter)="createTodo()" />
+    <div class="row no-gutter" *ngFor="let todo of todos">
+        <div class="col-xs-1">
+            <button class="btn btn-default" (click)="toggleTodo(todo)" >
+                <span *ngIf="!todo.done" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: transparent"></span>
+                <span *ngIf="todo.done" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="col-xs-10" *ngIf="!editingTodo || editingTodo.id != todo.id" (dblclick)="startEditingTodo(todo)">
+            <span class="h3">{{todo.content}}</span>
+        </div>
+        <div class="col-xs-10" *ngIf="editingTodo && editingTodo.id == todo.id">
+            <input [(ngModel)]="editingTodo.content" class="form-control" type="text" (keyup.enter)="finishEditingTodo()" (focusout)="cancelEditingTodo(todo)">
+        </div>
+        <div class="col-xs-1">
+            <button type="button" class="btn btn-default pull-right" (click)="deleteTodo(todo)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <input class="form-control" [(ngModel)]="newTodoContent" placeholder="Enter todo" (keyup.enter)="createTodo()" />
+        </div>
+    </div>
 </div>

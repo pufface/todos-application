@@ -11,13 +11,34 @@ import { Todo } from './todo';
 export class TodosComponent implements OnInit {
    
     todos: Todo[] = [];
-    newTodo = '';
+    newTodoContent = '';
     errorMsg = '';
+    editingTodo: Todo;
 
     constructor(private todoService: TodoService) {}
 
     ngOnInit(): void {
         this.getAllTodos();
+    }
+
+    startEditingTodo(todo: Todo): void {
+        this.editingTodo = Object.assign({}, todo);
+    }
+
+    cancelEditingTodo(): void {
+        this.editingTodo = null;
+    }
+
+    finishEditingTodo(): void {
+        this.todoService.update(this.editingTodo)
+            .then(updatedTodo => {
+                const i = this.todos.findIndex(t => t.id == this.editingTodo.id);
+                this.todos[i] = updatedTodo
+            })
+            .catch(this.showError.bind(this))
+            .then(_=> {
+                this.editingTodo = null;
+            })
     }
 
     getAllTodos(): void {
@@ -27,9 +48,9 @@ export class TodosComponent implements OnInit {
     }
 
     createTodo(): void {
-        this.todoService.create(this.newTodo)
+        this.todoService.create(this.newTodoContent)
             .then(todo => this.todos.push(todo))
-            .then(()=>this.newTodo = "")
+            .then(()=>this.newTodoContent = '')
             .catch(this.showError.bind(this));
     }
 
