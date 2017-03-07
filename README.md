@@ -17,9 +17,15 @@ run database: `$gradlew run`
 ## Todos Service
 Restfull stateless service for providing todo data. Secured with Basic authentication.
 
+### Users
+user:password
+jozko:mrkvicka
+
 ### API
 GET http://localhost:8090/todos
 POST http://localhost:8090/todos
+PUT http://localhost:8090/todos
+DELETE http://localhost:8090/todos/{id}
 
 run server: `$gradlew bootRun`
 create fat jar: `$gradlew bootRepackage`
@@ -34,9 +40,3 @@ install: `npm install`
 serve app: `npm run serve`
 run app dev: `npm start`
 to more script see package.json
-
-## Todos
-* Authentication (only BASIC)
-- Tests
-- Websocket (Optimalization Diff vs Full)
-	
