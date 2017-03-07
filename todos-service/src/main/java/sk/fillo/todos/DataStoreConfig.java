@@ -15,5 +15,5 @@ public class DataStoreConfig {
 	public DataSource dataSource() {
 	    return new JDBCDataSource();
 	}
-	
+
 }

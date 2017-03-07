@@ -24,13 +24,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    .httpBasic()
 		    	.and()
 		    .csrf().disable();
-		}
-	
+	}
+
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-        	.withUser("user").password("password").roles("USER");
-        
+        	.withUser("user").password("password").roles("USER")
+        		.and()
+        	.withUser("jozko").password("mrkvicka").roles("USER");
     }
 
 }
