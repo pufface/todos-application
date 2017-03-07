@@ -28,6 +28,7 @@ PUT http://localhost:8090/todos
 DELETE http://localhost:8090/todos/{id}
 
 run server: `$gradlew bootRun`  
+run tests: `$gradlew test`
 create fat jar: `$gradlew bootRepackage`  
 create eclipse project: `$gradlew eclipse`  
 

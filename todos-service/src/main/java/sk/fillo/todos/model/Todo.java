@@ -21,6 +21,12 @@ public class Todo {
 	public Todo() {
 	}
 
+	public Todo(String content, boolean done, User user) {
+		this.content = content;
+		this.done = done;
+		this.user = user;
+	}
+
 	public long getId() {
 		return id;
 	}
