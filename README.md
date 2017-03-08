@@ -1,7 +1,7 @@
 # Todos Web App
 
 ## Prerequisits
-- JRE 8
+- JDK 8
 - Node 6.10
 - Npm 4.3.0
 
